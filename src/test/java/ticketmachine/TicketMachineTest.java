@@ -67,5 +67,17 @@ public class TicketMachineTest {
 		machine.refund();
 		assertEquals(machine.getBalance(),0);
 	}
+	@Test
+	//S9 Pas d'insertion négative
+	public void noMontantNegatif(){
+		assertThrows(IllegalArgumentException.class, () -> { machine.insertMoney(-10); }, "Cet appel doit lever une exception");
+	}
+	@Test
+	//S10 On ne peut pas créer de ticket dont le prix est négatif
+	public void noTicketPrixNegatif(){
+		assertThrows(IllegalArgumentException.class, () -> {
+			TicketMachine machinetest = new TicketMachine(-10);
+			}, "Cet appel doit lever une exception");
+	}
 
 }
